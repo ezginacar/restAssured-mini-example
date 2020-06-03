@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import base.BaseTest;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -10,18 +11,13 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
-public class LoginTestSteps {
-
-    public String url= "http://thedemosite.co.uk";
-    private String path="/login.php";
-    private RequestSpecification request;
-    private Response response;
+public class LoginTestSteps extends BaseTest {
 
 
 
     @Given("^\"(.*?)\" information of the request headers is \"(.*?)\"$")
     public void header_enterance_with_given_key_and_value(String key, String value){
-        RestAssured.baseURI  = url;
+        
         request = given().header(key,value);
     }
 
@@ -54,18 +50,18 @@ public class LoginTestSteps {
       String msg = response.htmlPath().getString("html.body.table.tr.td.blockquote");
 
       if(!(msg.contains(arg))) {
-          Assert.assertSame(arg, msg);
+          Assert.fail("Test failed. Because "+ arg+" message is not visible");
       }
 
     }
     @Then("^\"(.*?)\" message should not be visible$")
     public void test(String arg) {
         String msg = response.htmlPath().getString("html.body.table.tr.td.blockquote");
-        if (!(msg.contains(arg))) {
-            Assert.assertNotSame(arg, msg);
+
+        if((msg.contains(arg))) {
+            Assert.fail("Test failed. Because "+ arg+" message is visible");
         }
     }
-
 
 
 
