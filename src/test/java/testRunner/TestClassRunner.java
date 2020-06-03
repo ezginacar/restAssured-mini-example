@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "features",
         glue = "stepDefinitions",
-        tags = {"@ez"},
+        tags = {"@test"},
         plugin = {"pretty", "html: API Test Reports"}
 
 )
