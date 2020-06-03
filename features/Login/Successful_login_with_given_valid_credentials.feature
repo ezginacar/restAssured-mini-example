@@ -1,6 +1,6 @@
 Feature: As a user, I'd like to log in with given valid credentials .So I can skip the following steps
 
-
+@test
   Scenario: Successful login with given valid credentials
     Given "content-type" information of the request headers is "application/x-www-form-urlencoded"
     And "cache-control" information of the request headers is "no-cache"
